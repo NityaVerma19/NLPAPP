@@ -14,8 +14,8 @@ class NLPApp:
         self.dbo = Database()
         self.apio = API()
 
-        # login ka gui load karna hai
-        self.root = Tk()  # tk class ke objects ko root (variable) mein save kar rahe hai
+        
+        self.root = Tk() 
         self.root.title("NLP APP")
         self.root.iconbitmap("Resources/favicon.ico")
         self.root.geometry("400x600")
@@ -25,27 +25,26 @@ class NLPApp:
 
         self.root.mainloop()  # GUI ko hold karke rakhta hai screen par
 
+    
     def login_gui(self):
         self.clear() #everything on the screen will be cleared
         heading = Label(self.root, text="NLP APP", bg="#C4006E", fg="black")
 
         heading.pack(pady=(30, 30))  # pack displays the text on the gui
-        # pady(30,30)- uper neeche se 30 30 ka gap
+     
         heading.configure(font=("Times New Roman", 24, "bold"))
 
         label1 = Label(self.root, text="ENTER EMAIL", bg="#C4006E", fg="black")
         label1.pack(pady=(20, 20))
 
-        self.email_input = Entry(self.root, width=35)  # class which helps the user to input
-        # we used self here because different methods of our class will use this
-        self.email_input.pack(pady=(5, 10), ipady =3) #ipady - internal padding in y direction(verical)
+        self.email_input = Entry(self.root, width=35)  
+        self.email_input.pack(pady=(5, 10), ipady =3) #ipady - internal padding in y direction(vertical)
 
         label2 = Label(self.root, text="ENTER PASSWORD", bg="#C4006E", fg="black")
         label2.pack(pady=(20, 20))
 
         self.pass_input = Entry(self.root, width=35, show = "*")  # class which helps the user to input
-        # we used self here because different methods of our class will use this
-        self.pass_input.pack(pady=(5, 10), ipady=3)  # ipady - internal padding in y direction(verical)
+        self.pass_input.pack(pady=(5, 10), ipady=3)  
 
 
         login_but = Button(self.root, text = 'Login', width = 30, height = 1, command = self.perform_login) #button ko height de sakte hai, text ko nahi
@@ -57,36 +56,34 @@ class NLPApp:
         redirect_but = Button(self.root, text = "Register now", command = self.register_gui)
         redirect_but.pack(pady = (5,5))
 
+        #redirecting to register page
     def register_gui(self):
         self.clear()
 
         heading = Label(self.root, text="NLP APP", bg="#C4006E", fg="black")
 
-        heading.pack(pady=(30, 30))  # pack displays the text on the gui
-        # pady(30,30)- uper neeche se 30 30 ka gap
+        heading.pack(pady=(30, 30))  
         heading.configure(font=("Times New Roman", 24, "bold", "underline"))
 
         label1 = Label(self.root, text="ENTER NAME", bg="#C4006E", fg="black")
         label1.pack(pady=(20, 20))
 
-        self.name_input = Entry(self.root, width=35)  # class which helps the user to input
-        # we used self here because different methods of our class will use this
-        self.name_input.pack(pady=(5, 10), ipady=3)  # ipady - internal padding in y direction(verical)
+        self.name_input = Entry(self.root, width=35)  
+        self.name_input.pack(pady=(5, 10), ipady=3) 
 
         label1 = Label(self.root, text="ENTER EMAIL", bg="#C4006E", fg="black")
         label1.pack(pady=(20, 20))
 
-        self.email_input = Entry(self.root, width=35)  # class which helps the user to input
-        # we used self here because different methods of our class will use this
-        self.email_input.pack(pady=(5, 10), ipady=3)  # ipady - internal padding in y direction(verical)
+        self.email_input = Entry(self.root, width=35)  
+        self.email_input.pack(pady=(5, 10), ipady=3)  
 
         label2 = Label(self.root, text="ENTER PASSWORD", bg="#C4006E", fg="black")
         label2.pack(pady=(20, 20))
 
-        self.pass_input = Entry(self.root, width=35, show="*")  # class which helps the user to input
-        # we used self here because different methods of our class will use this
-        self.pass_input.pack(pady=(5, 10), ipady=3)  # ipady - internal padding in y direction(verical)
+        self.pass_input = Entry(self.root, width=35, show="*") 
+        self.pass_input.pack(pady=(5, 10), ipady=3) 
 
+        #will jump to registration function
         reg_but = Button(self.root, text='Register', width=30, height=1, command = self.perform_registration)  # button ko height de sakte hai, text ko nahi
         reg_but.pack(pady=(10, 10))
 
@@ -97,15 +94,14 @@ class NLPApp:
         redirect_but.pack(pady=(5, 5))
 
 
-    def clear(self): #this code will be used multiple times, therefore it is made into a separate function
-        # clear the existing GUI
+    def clear(self): 
         for i in self.root.pack_slaves():  # fetching all the slaves
-            i.destroy()  # destroy saare slaves ko destroy karega
+            i.destroy()  
 
 
     def perform_registration(self):
         #fetch data from the gui
-        name = self.name_input.get()    #jo bhi name ke under hai, "get" usko fetch karega from the gui
+        name = self.name_input.get()    
 
         email = self.email_input.get()
         password = self.pass_input.get()
@@ -152,7 +148,7 @@ class NLPApp:
         logout_but = Button(self.root, text="Logout", command=self.login_gui)
         logout_but.pack(pady=(5, 5))
 
-
+        #gui for sentiment analysis page
     def sentiment_gui(self):
 
         self.clear()
@@ -183,6 +179,7 @@ class NLPApp:
         goback_btn = Button(self.root, text='Go Back', command=self.home_gui)
         goback_btn.pack(pady=(10, 10))
 
+        #analyzing and generating results
     def do_sentiment_analysis(self):
         text = self.sentiment_input.get()
         result = self.apio.sentiment_analysis(text)
@@ -194,7 +191,7 @@ class NLPApp:
 
         self.sentiment_result['text'] = txt
 
-
+        #gui for the named entity recognition
     def ner_gui(self):
 
         self.clear()
@@ -223,6 +220,8 @@ class NLPApp:
         goback_btn = Button(self.root, text='Go Back', command=self.home_gui)
         goback_btn.pack(pady=(10, 10))
 
+
+        #Analyzing the texts
     def do_ner_analysis(self):
         text = self.ner_input.get()
         result = self.apio.ner_analysis(text)
@@ -237,6 +236,7 @@ class NLPApp:
         self.ner_result['text'] = '\n'.join(ner_results_text)
 
 
+        #Emotion analysis page
     def emo_gui(self):
 
         self.clear()
@@ -262,6 +262,7 @@ class NLPApp:
         self.emo_result.pack(pady=(10, 10), ipady = 50)
         self.emo_result.configure(font=('Times New Roman', 11))
 
+        #Function for performing emotion analysis on a text
     def do_emo_analysis(self):
 
         text = self.emo_input.get()
