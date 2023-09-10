@@ -5,17 +5,17 @@ class Database:
     def add_data(self, name, email, password):
 
         with open ("db.json", "r") as rf:
-            database = json.load(rf)  #jitne bhi users ka data file mein hai, we eill load in this variable
+            database = json.load(rf)  #jitne bhi users ka data file mein hai, we will load in this variable
 
         if email in database:  #agar pehle se email exists
             return 0   #registration nahi hoga
         else:
-            database[email] = [name, password]  #database mein naya key banakar list mein name and passworf
+            database[email] = [name, password]  #database mein naya key banakar list mein name and password
             with open('db.json', 'w') as wf:
                 json.dump(database, wf)
             return 1
 
-    def search(self, email, password): #this function checks whether the user with that email exists and if the pass is corrext
+    def search(self, email, password): #this function checks whether the user with that email exists and if the pass is correct
 
         with open("db.json", "r") as rf:
             database = json.load(rf)
